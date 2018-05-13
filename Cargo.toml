@@ -4,3 +4,4 @@ version = "0.1.0"
 authors = ["Gunnar Klämke <gunnar-klaemke@gmx.de>"]
 
 [dependencies]
+term = "0.5"

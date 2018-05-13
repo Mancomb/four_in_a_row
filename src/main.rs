@@ -1,3 +1,5 @@
+extern crate term;
+
 use std::fmt;
 use std::io::prelude::*;
 
@@ -59,12 +61,21 @@ impl Default for Field{
 
 impl fmt::Display for Field {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut t = term::stdout().unwrap();
         let c = match self {
-            Field::Empty => ' ',
-            Field::Stone(Player::Red) => 'x',
-            Field::Stone(Player::Yellow) => 'o'
+            Field::Empty => "   ",
+            Field::Stone(Player::Red) => {
+                t.fg(term::color::GREEN).unwrap();
+                " O "
+                },
+            Field::Stone(Player::Yellow) => {
+                t.fg(term::color::RED).unwrap();
+                " O "
+            }
         };
-        write!(f, "{}", c)
+        write!(f, "{}", c).unwrap();
+        t.reset().unwrap();
+        Ok(())
     }
 }
 
@@ -77,7 +88,8 @@ impl fmt::Display for Board {
             }
             write!(f, "|\n")?;
         }
-        write!(f, "---------\n")?;
+        write!(f, "-----------------------\n")?;
+        write!(f, "  0  1  2  3  4  5  6  \n")?;        
         Ok(())
     }
 }
@@ -96,4 +108,5 @@ fn main() {
         board.apply_move(col);
         println!("{}", board);
     }
+    
 }
