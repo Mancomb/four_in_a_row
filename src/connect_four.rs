@@ -27,6 +27,7 @@ enum Field {
     PlayerTwo,
 }
 
+#[derive(Clone)]
 pub struct ConnectFour {
     /// One bitboard for each player
     bitboards: [Bitboard; 2],

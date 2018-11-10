@@ -1,4 +1,4 @@
-#[derive(PartialEq, Eq)]
+#[derive(PartialEq, Eq, Clone, Copy)]
 pub enum GameState {
     /// The game is not yet finished. The index indicates those players turn it is. Counting starts
     /// at `0`.
@@ -12,7 +12,7 @@ pub enum GameState {
 }
 
 /// A null sum game which can be solved with monte carlo search trees and heuristics.
-pub trait Game {
+pub trait Game: Clone {
     type Move: Clone;
 
     /// Obtains iterator over list of legal moves

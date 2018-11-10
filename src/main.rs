@@ -1,6 +1,7 @@
 mod bitboard;
 mod connect_four;
 mod game;
+mod monte_carlo;
 mod player;
 mod random;
 mod user;
@@ -14,8 +15,10 @@ use user::User;
 
 fn main() {
     let mut game = ConnectFour::new();
+
+    // Change these variables to set Players either to User, Random or Search Tree
     let player_one = User;
-    let player_two = Random;
+    let player_two = monte_carlo::MonteCarlo; //Random;
 
     let players: [&dyn Player<_>; 2] = [&player_one, &player_two];
 
